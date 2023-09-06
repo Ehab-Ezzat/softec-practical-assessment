@@ -1,0 +1,38 @@
+<h3 class="fw-bold mb-4 mt-2 pt-1">Summary</h3>
+<hr class="my-4">
+
+<div class="d-flex justify-content-between mb-4">
+  <h5 class="text-uppercase">items </h5>
+  <h5>{{cartService.cart.value.length}}</h5>
+</div>
+<form [formGroup]="form">
+  <div class="mb-4">
+    <div class="d-flex align-items-center justify-content-between gap-5">
+      <h5 class="text-uppercase">Payment Method</h5>
+      <select class="form-select flex-auto" aria-label="Default select example" formControlName="paymentMethod">
+        <option value="cash">Cash</option>
+        <option value="online">Online</option>
+      </select>
+    </div>
+    <p class="text-danger fs-6" *ngIf="f['paymentMethod']?.errors?.['required'] && f['paymentMethod'].touched">This field is required</p>
+  </div>
+
+  <div class="mb-4">
+    <div class="d-flex align-items-center justify-content-between gap-5">
+      <h5 class="text-uppercase">User</h5>
+      <select class="form-select flex-auto w-100" aria-label="Default select example" formControlName="userId">
+        <option [value]="user.Id" *ngFor="let user of allUsers$ | async">
+          {{user.Name}}
+        </option>
+        userId
+      </select>
+    </div>
+    <p class="text-danger fs-6" *ngIf="f['userId']?.errors?.['required'] && f['userId'].touched">This field is required</p>
+  </div>
+</form>
+
+<hr class="my-4">
+<div class="d-flex justify-content-between mb-5">
+  <h5 class="text-uppercase">Total price</h5>
+  <h5>{{cartService.totalPrice.value | currency}}</h5>
+</div>

@@ -1,0 +1,31 @@
+<section class="h-custom">
+  <div class="container h-100" [ngClass]="{'d-flex align-items-center justify-content-center': cartService.cart.value.length == 0}">
+    <div class="row d-flex justify-content-center align-items-center h-100" *ngIf="cartService.cart.value.length > 0">
+      <div class="col-12 py-4">
+        <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+          <div class="card-body p-0">
+            <div class="row g-0">
+              <div class="col-xl-7">
+                <div class="p-5">
+                  <h1 class="fw-bold mb-0 text-black">Shopping Cart</h1>
+                  <ng-container *ngFor="let product of cartService.cart | async">
+                    <cart-products [product]="product"></cart-products>
+                  </ng-container>
+                </div>
+              </div>
+              <div class="col-xl-5 bg-grey">
+                <div class="p-5">
+                  <cart-summary (formData)="cartForm = $event"></cart-summary>
+                  <button type="button" class="btn btn-dark btn-block btn-lg" data-mdb-ripple-color="dark" (click)="orderNow()">
+                    Order now
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h4 *ngIf="cartService.cart.value.length == 0">No Products Added To Cart</h4>
+  </div>
+</section>

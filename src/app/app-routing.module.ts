@@ -5,6 +5,7 @@ const routes: Routes = [
   {path: 'products', loadComponent: () => import('./components/products/products.component').then(m => m.ProductsComponent)},
   {path: 'orders', loadComponent: () => import('./components/orders/orders.component').then(m => m.OrdersComponent)},
   {path: 'orders/:id', loadComponent: () => import('./components/order-details/order-details.component').then(m => m.OrderDetailsComponent)},
+  {path: 'cart', loadComponent: () => import('./components/cart/cart.component').then(m => m.CartComponent)},
   {path: '', redirectTo: 'products', pathMatch: 'full'},
 ];
 
