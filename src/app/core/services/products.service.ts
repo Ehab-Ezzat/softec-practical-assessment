@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Product} from "../interfaces/product";
-import {map, Observable} from "rxjs";
+import {forkJoin, map, Observable} from "rxjs";
+import {ExtendedProduct} from "../interfaces/order-details";
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,20 @@ export class ProductsService {
 
   getProductById(productId: number): Observable<Product> {
     return this.getAllProducts().pipe(map((products: any) => products.find((item: any) => item.ProductId === productId)))
+  }
+
+  getProductsInfo(productsInfo: any[]): Observable<ExtendedProduct[]> {
+    const products$ = productsInfo.map((productInfo: any) => {
+      const productId = productInfo.ProductId;
+      const quantity = productInfo.Quantity;
+      return this.getProductById(productId).pipe(
+        map((product: any) => ({
+          ...product,
+          Quantity: quantity
+        }))
+      );
+    });
+    return forkJoin(products$);
   }
 
 }
