@@ -5,3 +5,20 @@ h1, h2, h3, h4, h5, p {
 .gap-y {
   gap: 1.5rem 0;
 }
+
+.gap-y-1 {
+  gap: .5rem 0;
+}
+
+.flex-auto {
+  flex: 1 1 auto;
+  width: auto;
+}
+
+.line-height {
+  line-height: 1;
+}
+
+button {
+  border: none !important;
+}

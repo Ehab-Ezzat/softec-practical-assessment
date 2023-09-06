@@ -4,6 +4,7 @@ import {ProductsService} from "../../core/services/products.service";
 import {Product} from "../../core/interfaces/product";
 import {Observable} from "rxjs";
 import {ProductCardComponent} from "../../core/components/product-card.component";
+import {CartService} from "../../core/services/cart.service";
 
 @Component({
   selector: 'app-products',
@@ -15,4 +16,9 @@ import {ProductCardComponent} from "../../core/components/product-card.component
 export class ProductsComponent {
   productsService = inject(ProductsService);
   products$: Observable<Product[]> = this.productsService.getAllProducts();
+  cartService = inject(CartService);
+
+  addToCart(product: any) {
+    this.cartService.addToCart(product);
+  }
 }

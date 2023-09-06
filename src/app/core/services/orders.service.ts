@@ -52,7 +52,6 @@ export class OrdersService {
         ]).pipe(map(([user, products]) => {
           // remove Products property from order since we already have Products
           delete order.Products;
-          console.log(user)
           return {
             ...order,
             user,
