@@ -1,16 +1,18 @@
 import {Injectable} from '@angular/core';
-import {forkJoin, map, Observable, switchMap} from "rxjs";
+import {forkJoin, map, mergeMap, Observable, switchMap} from "rxjs";
 import {Order} from "../interfaces/order";
 import {HttpClient} from "@angular/common/http";
 import {Product} from "../interfaces/product";
 import {ProductsService} from "./products.service";
+import {OrderDetails} from "../interfaces/order-details";
+import {UsersService} from "./users.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrdersService {
 
-  constructor(private http: HttpClient, private productsService: ProductsService) {
+  constructor(private http: HttpClient, private productsService: ProductsService, private usersService: UsersService) {
   }
 
   getAllOrders(): Observable<Order[]> {
@@ -36,6 +38,27 @@ export class OrdersService {
               return orders;
             })
           );
+      })
+    );
+  }
+
+  getOrderById(orderId: number): Observable<OrderDetails> {
+    return this.getAllOrders().pipe(
+      mergeMap((orders: any) => {
+        const order = orders.find((item: any) => item.OrderId === orderId);
+        return forkJoin([
+          this.usersService.getUserById(order.UserId),
+          this.productsService.getProductsInfo(order.Products)
+        ]).pipe(map(([user, products]) => {
+          // remove Products property from order since we already have Products
+          delete order.Products;
+          console.log(user)
+          return {
+            ...order,
+            user,
+            Products: products
+          }
+        }));
       })
     );
   }

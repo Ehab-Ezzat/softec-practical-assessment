@@ -1,0 +1,19 @@
+<div class="order-details" *ngIf="order$ | async as order">
+  <div class="row">
+    <div class="col-lg-8">
+      <h3 class="mb-3">Order Details</h3>
+      <div class="products">
+        <ng-container *ngFor="let product of order.Products">
+          <product-details-card [product]="product"></product-details-card>
+        </ng-container>
+        <div class="p-3 d-flex align-items-center justify-content-between">
+          <p class="fw-bold">Total:</p>
+          <p>{{order.TotalPrice | currency}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <customer-details-card [order]="order"></customer-details-card>
+    </div>
+  </div>
+</div>

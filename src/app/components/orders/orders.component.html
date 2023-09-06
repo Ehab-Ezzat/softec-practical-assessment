@@ -13,7 +13,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let order of orders" class="border-bottom">
+      <tr *ngFor="let order of orders" class="border-bottom" [routerLink]="String(order.OrderId)">
         <td>{{ order.OrderId }}</td>
         <td>{{ order.OrderDate | date}}</td>
         <td>{{ order.UserId }}</td>
