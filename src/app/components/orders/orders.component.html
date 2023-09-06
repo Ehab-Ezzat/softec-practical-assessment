@@ -9,6 +9,7 @@
         <th>User ID</th>
         <th>Products</th>
         <th>Payment Type</th>
+        <th>Total</th>
       </tr>
       </thead>
       <tbody>
@@ -24,6 +25,7 @@
           </ul>
         </td>
         <td>{{ order.PaymentType }}</td>
+        <td>{{ order.TotalPrice | currency }}</td>
       </tr>
       </tbody>
     </table>
