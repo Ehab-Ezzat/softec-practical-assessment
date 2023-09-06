@@ -1,0 +1,8 @@
+<h1 class="mb-3">Products</h1>
+<ng-container *ngIf="products$ | async as products">
+  <div class="row gap-y">
+    <div class="col-lg-3" *ngFor="let product of products">
+      <product-card [product]="product"></product-card>
+    </div>
+  </div>
+</ng-container>
