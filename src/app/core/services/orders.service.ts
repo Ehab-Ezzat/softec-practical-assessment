@@ -50,7 +50,7 @@ export class OrdersService {
           this.usersService.getUserById(order.UserId),
           this.productsService.getProductsInfo(order.Products)
         ]).pipe(map(([user, products]) => {
-          // remove Products property from order since we already have Products
+          // remove Products property from order since we already have new Products array with all the details of the product
           delete order.Products;
           return {
             ...order,
