@@ -1,1 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
+h1, h2, h3, h4, h5, p {
+  margin-bottom: 0 !important;
+}
+
+.gap-y {
+  gap: 1.5rem 0;
+}
+
+.gap-y-1 {
+  gap: .5rem 0;
+}
+
+.flex-auto {
+  flex: 1 1 auto;
+  width: auto;
+}
+
+.line-height {
+  line-height: 1;
+}
+
+button {
+  border: none !important;
+}
+
+.table > :not(caption) > * > * {
+  background-color: unset !important;
+}
